@@ -1,1 +1,13 @@
-<p>home works!</p>
+<section
+  class="bg-dark p-3 d-flex flex-column justify-content-center align-items-center vh-100"
+>
+  <h1 class="text-white p-3 border-danger border-3 border-bottom">
+    Bienvenido a la app de usuarios
+  </h1>
+  <p class="text-white mt-5">
+    Aquí podrá agregar nuevos usuarios, actualizar o borrar existentes
+  </p>
+  <a [routerLink]="['/dashboard', 'users']" class="btn btn-danger mt-4"
+    >Lista de usuarios</a
+  >
+</section>

@@ -14,7 +14,10 @@
         title="Ver detalle"
         ><i class="fa-solid fa-magnifying-glass"></i
       ></a>
-      <a class="btn btn-outline-primary btn-block mx-1 w-100" title="Actualizar"
+      <a
+        class="btn btn-outline-primary btn-block mx-1 w-100"
+        [routerLink]="['/dashboard', 'users', user._id, 'edit']"
+        title="Actualizar"
         ><i class="fa-solid fa-arrows-rotate"></i
       ></a>
       <a class="btn btn-outline-primary btn-block mx-1 w-100" title="Borrar"

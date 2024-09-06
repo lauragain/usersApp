@@ -3,6 +3,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { UserListComponent } from './pages/user-list/user-list.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { FormComponent } from './pages/form/form.component';
+import { UserViewComponent } from './pages/user-view/user-view.component';
 
 export const routes: Routes = [
     {path: "", pathMatch: 'full', redirectTo: 'home'},
@@ -10,7 +11,9 @@ export const routes: Routes = [
     {path: "dashboard", component: DashboardComponent, children: [
         {path: "", pathMatch: 'full', redirectTo: 'users'},
         {path: "users", component: UserListComponent},
-        {path: "new-user", component: FormComponent}
+        {path: "users/news", component: FormComponent},
+        {path: "users/:id/edit", component: FormComponent},
+        {path: "users/:id", component: UserViewComponent}
     ]},
     
     {path: '**', redirectTo: 'home'}

@@ -1,1 +1,11 @@
-<p>user-list works!</p>
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Lista de usuarios</h2>
+</div>
+
+<div class="row">
+  @for (user of arrUsers; track user._id){
+  <div class="col-md-4 mb-4">
+    <app-user-card [user]="user"></app-user-card>
+  </div>
+  }
+</div>

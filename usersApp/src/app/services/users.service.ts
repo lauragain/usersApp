@@ -7,7 +7,7 @@ import { firstValueFrom } from 'rxjs';
   providedIn: 'root'
 })
 export class UsersService {
-  private baseUrl: string = "https://peticiones.online/users"
+  private baseUrl: string = "https://peticiones.online/api/users"
   
   private http = inject(HttpClient)
 

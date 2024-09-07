@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { IUser } from '../interfaces/iuser.interface';
 import { firstValueFrom } from 'rxjs';
+import { isScheduler } from 'rxjs/internal/util/isScheduler';
 
 @Injectable({
   providedIn: 'root'
@@ -21,5 +22,10 @@ export class UsersService {
     const response = await firstValueFrom(this.http.get<{ results: IUser[]}>(`${this.baseUrl}?id=${id}`))
     const user = response.results.find(user => user._id === id)
     return user ? user : null
+  }
+
+  async deleteUser(id: string): Promise<IUser | null>{
+    const response = await firstValueFrom(this.http.delete<IUser>(`${this.baseUrl}/${id}`))
+    return response ? response : null
   }
 }

@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { IUser } from '../../interfaces/iuser.interface';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { UsersService } from '../../services/users.service';
 
 @Component({
@@ -12,17 +12,37 @@ import { UsersService } from '../../services/users.service';
 })
 export class UserViewComponent implements OnInit{
   user: IUser | null = null;
+  arrUsers: IUser[] = []
   activatedRoute = inject(ActivatedRoute)
   usersService = inject(UsersService)
+  router = inject(Router)
 
   ngOnInit(){
     this.activatedRoute.params.subscribe(async (params: any) =>{
       let id = params.id
       this.user = await this.usersService.getById(id)
+      this.arrUsers = await this.usersService.getAll()
     })
   }
 
-  deleteUser(){
-    
+  async deleteUser(){
+    if(this.user) {
+      const confirmed = confirm(`¿Estás seguro de eliminar al usuario ${this.user.first_name} ${this.user.last_name}?`)
+      if(confirmed){
+        try{
+          const response = await this.usersService.deleteUser(this.user._id!)
+          if(response?._id){
+            alert(`Usuario ${response.first_name} ${response.last_name} eliminado correctamente`)
+            this.arrUsers = await this.usersService.getAll()
+            this.router.navigate(['/dashboard', 'users'])
+          } else {
+            alert('No se pudo eliminar el usuario. Inténtalo de nuevo.')
+          }
+        } catch(error){
+        console.error('Error al eliminar al usuario', error)
+        alert('Ocurrió un error al eliminar el usuario. Intenta de nuevo')
+      }
+    }
   }
+}
 }

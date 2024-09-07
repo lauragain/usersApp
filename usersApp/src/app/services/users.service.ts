@@ -16,4 +16,10 @@ export class UsersService {
     const page2 = await firstValueFrom(this.http.get<{ results: IUser[]}>(`${this.baseUrl}?page=2`))
     return [...page1.results, ...page2.results]
   }
+
+  async getById(id: string): Promise<IUser | null>{
+    const response = await firstValueFrom(this.http.get<{ results: IUser[]}>(`${this.baseUrl}?id=${id}`))
+    const user = response.results.find(user => user._id === id)
+    return user ? user : null
+  }
 }

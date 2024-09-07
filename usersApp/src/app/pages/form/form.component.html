@@ -1,1 +1,55 @@
-<p>form works!</p>
+<section class="container mt-3">
+  <div class="card shadow p-5">
+    <h3>Insertar un nuevo usuario</h3>
+    <hr />
+    <form [formGroup]="userForm" (ngSubmit)="getDataForm()">
+      <div class="my-3">
+        <label class="form-label" for="first_name">Nombre</label>
+        <input
+          class="form-control"
+          type="text"
+          id="first_name"
+          formControlName="first_name"
+          placeholder="Introduce el nombre"
+        />
+      </div>
+
+      <div class="my-3">
+        <label class="form-label" for="last_name">Apellidos</label>
+        <input
+          class="form-control"
+          type="text"
+          id="last_name"
+          formControlName="last_name"
+          placeholder="Introduce el apellido"
+        />
+      </div>
+
+      <div class="my-3">
+        <label class="form-label" for="email">Email</label>
+        <input
+          class="form-control"
+          type="text"
+          id="email"
+          formControlName="email"
+          placeholder="Introduce el email"
+        />
+      </div>
+
+      <div class="my-3">
+        <label class="form-label" for="image">Imagen</label>
+        <input
+          class="form-control"
+          type="url"
+          id="image"
+          formControlName="image"
+          placeholder="Introduce la url de la imagen"
+        />
+      </div>
+
+      <div class="my-3">
+        <input type="submit" value="Insertar" class="btn btn-danger" />
+      </div>
+    </form>
+  </div>
+</section>

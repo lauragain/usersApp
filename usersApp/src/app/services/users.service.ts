@@ -28,4 +28,8 @@ export class UsersService {
     const response = await firstValueFrom(this.http.delete<IUser>(`${this.baseUrl}/${id}`))
     return response ? response : null
   }
+
+  insert(body: IUser): Promise<IUser>{
+    return firstValueFrom(this.http.post<IUser>(this.baseUrl, body))
+  }
 }

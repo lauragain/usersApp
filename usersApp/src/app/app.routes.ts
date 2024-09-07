@@ -11,8 +11,8 @@ export const routes: Routes = [
     {path: "dashboard", component: DashboardComponent, children: [
         {path: "", pathMatch: 'full', redirectTo: 'users'},
         {path: "users", component: UserListComponent},
-        {path: "users/news", component: FormComponent},
-        {path: "users/:id/edit", component: FormComponent},
+        {path: "newuser", component: FormComponent},
+        {path: "updateuser/:id", component: FormComponent},
         {path: "users/:id", component: UserViewComponent}
     ]},
     

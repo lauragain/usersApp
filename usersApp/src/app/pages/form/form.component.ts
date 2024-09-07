@@ -3,6 +3,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { IUser } from '../../interfaces/iuser.interface';
 import { UsersService } from '../../services/users.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-form',
@@ -49,22 +50,29 @@ export class FormComponent {
 
   async getDataForm(){
     if (this.userForm.invalid){
-      alert('Por favor, completa correctamente los campos antes de enviar.')
+      alert('Por favor, completa correctamente todos los campos antes de enviar.')
       return
     }
     try{
       if (this.update){
         const response: IUser = await this.usersService.updateUser(this.userId!, this.userForm.value)
-        alert('Usuario actualizado correctamente')
+        alert('Usuario actualizado correctamente.')
       } else {
         const response: IUser = await this.usersService.insert(this.userForm.value)
-        alert('Usuario insertado correctamente')
+        alert('Usuario guardado correctamente.')
       }
         this.userForm.reset()
         this.router.navigate(['/dashboard', 'users'])
       }catch(error){
-      console.log(error)
-      alert('Error al insertar el usuario. Inténtalo de nuevo')
+        if (error instanceof HttpErrorResponse){
+          if (error.status === 409){
+            alert('El usuario ya existe. Por favor, revisa los datos.')
+        } else {
+          alert('Error al insertar el usuario. Inténtalo de nuevo.')         
+        }
+        } else {
+          console.log('Error desconocido', error)
+        }
     }
   }
 }

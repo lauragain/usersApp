@@ -1,25 +1,18 @@
 <section
-  class="container mt-5 d-flex justify-content-center align-items-center"
+  class="container mt-5 d-flex flex-column flex-md-row justify-content-center align-items-center bg-dark text-white p-5 rounded"
 >
-  <div class="col-md-4 text-center">
+  <div class="col-md-4 text-center mb-4 mb-md-0">
     <img
       [src]="user?.image"
-      class="rounded-end-circle"
+      class="rounded-end-circle img-fluid"
       alt="{{ user?.username }}"
-      style="
-        width: 200px;
-        height: 200px;
-        object-fit: cover;
-        border: 3px solid;
-        background-color: rgb(189, 150, 114);
-      "
     />
   </div>
   <div class="col-md-8 d-flex align-items-center">
     <div class="card-body">
-      <h3>{{ user?.first_name }}</h3>
-      <h4>{{ user?.last_name }}</h4>
-      <hr />
+      <h3 class="text-white">{{ user?.first_name }}</h3>
+      <h4 class="text-white">{{ user?.last_name }}</h4>
+      <hr class="bg-white" />
       <p><strong>Nombre Usuario: </strong>{{ user?.username }}</p>
       <p><strong>Email: </strong>{{ user?.email }}</p>
 

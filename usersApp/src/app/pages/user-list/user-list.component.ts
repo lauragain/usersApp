@@ -11,15 +11,22 @@ import { UserCardComponent } from '../../components/user-card/user-card.componen
   styleUrl: './user-list.component.css'
 })
 export class UserListComponent implements OnInit {
-  arrUsers: IUser[] = []
+  arrUsersPage1: IUser[] = []
+  arrUsersPage2: IUser[] = []
+  currentPage = 1
   usersService = inject(UsersService)
 
   async ngOnInit(){
     try{
       const response = await this.usersService.getAll()
-      this.arrUsers = response 
+      const mid = Math.ceil(response.length / 2)
+      this.arrUsersPage1 = response.slice(0, mid)
+      this.arrUsersPage2 = response.slice(mid)
     } catch(error) {
       console.log(error)
     }
+  }
+  changePage(page: number){
+    this.currentPage = page
   }
 }

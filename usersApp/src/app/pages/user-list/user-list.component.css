@@ -1,0 +1,8 @@
+.user-card {
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.user-card:hover{
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(255, 0, 0, 0.7)
+}

@@ -19,9 +19,8 @@ export class UsersService {
   }
 
   async getById(id: string): Promise<IUser | null>{
-    const response = await firstValueFrom(this.http.get<{ results: IUser[]}>(`${this.baseUrl}?id=${id}`))
-    const user = response.results.find(user => user._id === id)
-    return user ? user : null
+    const response = await firstValueFrom(this.http.get<IUser>(`${this.baseUrl}/${id}`))
+    return response ? response : null
   }
 
   async deleteUser(id: string): Promise<IUser | null>{

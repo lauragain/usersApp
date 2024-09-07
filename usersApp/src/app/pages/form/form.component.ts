@@ -26,13 +26,18 @@ export class FormComponent {
   }
 
   async getDataForm(){
+    console.log('Formulario enviaado:', this.userForm.value)
     try{
       const response: IUser = await this.usersService.insert(this.userForm.value)
-      if (response._id){
+      console.log('Respuesta de la API:', response)
+      if (response && response.id){
+        alert('Usuario inserado correctamente')
+        this.userForm.reset()
         this.router.navigate(['/dashboard', 'users'])
       }
     } catch(error){
       console.log(error)
+      alert('Error al insertar el usuario. Inténtalo de nuevo')
     }
   }
 }

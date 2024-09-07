@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IUser } from '../../interfaces/iuser.interface';
 import { UsersService } from '../../services/users.service';
 import { Router } from '@angular/router';
@@ -18,18 +18,20 @@ export class FormComponent {
 
   constructor(){
     this.userForm = new FormGroup({
-      first_name: new FormControl(null, []),
-      last_name: new FormControl(null, []),
-      email: new FormControl(null, []),
-      image: new FormControl(null, [])
+      first_name: new FormControl(null, [Validators.required]),
+      last_name: new FormControl(null, [Validators.required]),
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      image: new FormControl(null, [Validators.required])
     })
   }
 
   async getDataForm(){
-    console.log('Formulario enviaado:', this.userForm.value)
+    if (this.userForm.invalid){
+      alert('Por favor, completa correctamente los campos antes de enviar.')
+      return
+    }
     try{
       const response: IUser = await this.usersService.insert(this.userForm.value)
-      console.log('Respuesta de la API:', response)
       if (response && response.id){
         alert('Usuario inserado correctamente')
         this.userForm.reset()

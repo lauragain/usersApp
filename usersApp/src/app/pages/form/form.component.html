@@ -1,6 +1,6 @@
 <section class="container mt-3">
   <div class="card shadow p-5">
-    <h3>Insertar un nuevo usuario</h3>
+    <h3>{{ formTitle }}</h3>
     <hr />
     <form [formGroup]="userForm" (ngSubmit)="getDataForm()">
       <div class="my-3">
@@ -88,7 +88,7 @@
       </div>
 
       <div class="my-3">
-        <input type="submit" value="Insertar" class="btn btn-danger" />
+        <input type="submit" [value]="buttonText" class="btn btn-danger" />
       </div>
     </form>
   </div>

@@ -32,4 +32,8 @@ export class UsersService {
   insert(body: IUser): Promise<IUser>{
     return firstValueFrom(this.http.post<IUser>(this.baseUrl, body))
   }
+
+  async updateUser(id: string, body: IUser): Promise<IUser>{
+    return firstValueFrom(this.http.put<IUser>(`${this.baseUrl}/${id}`, body))
+  }
 }

@@ -1,0 +1,100 @@
+<section class="container mt-3">
+  <div class="card shadow p-5 bg-dark text-white">
+    <h3>{{ formTitle }}</h3>
+    <hr />
+    <form [formGroup]="userForm" (ngSubmit)="getDataForm()">
+      <div class="my-3">
+        <label class="form-label" for="first_name"
+          >Nombre <span class="text-danger">*</span></label
+        >
+        <input
+          class="form-control"
+          type="text"
+          id="first_name"
+          formControlName="first_name"
+          placeholder="Introduce el nombre"
+        />
+        @if (userForm.get('first_name')?.invalid &&
+        userForm.get('first_name')?.touched){
+        <div class="text-danger">
+          @if (userForm.get('first_name')?.hasError('required')){
+          <small>El nombre es obligatorio.</small>
+          }
+        </div>
+        }
+      </div>
+
+      <div class="my-3">
+        <label class="form-label" for="last_name"
+          >Apellidos<span class="text-danger">*</span></label
+        >
+        <input
+          class="form-control"
+          type="text"
+          id="last_name"
+          formControlName="last_name"
+          placeholder="Introduce el apellido"
+        />
+        @if(userForm.get('last_name')?.invalid &&
+        userForm.get('last_name')?.touched){
+        <div class="text-danger">
+          @if(userForm.get('last_name')?.hasError('required')){
+          <small>El apellido es obligatorio.</small>
+          }
+        </div>
+        }
+      </div>
+
+      <div class="my-3">
+        <label class="form-label" for="email"
+          >Email<span class="text-danger">*</span></label
+        >
+        <input
+          class="form-control"
+          type="email"
+          id="email"
+          formControlName="email"
+          placeholder="Introduce el email"
+        />
+        @if (userForm.get('email')?.invalid && userForm.get('email')?.touched){
+        <div class="text-danger">
+          @if (userForm.get('email')?.hasError('required')){
+          <small>El email es obligatorio.</small>
+          } @if (userForm.get('email')?.hasError('email')){
+          <small>Debe ser un email válido.</small>
+          }
+        </div>
+        }
+      </div>
+
+      <div class="my-3">
+        <label class="form-label" for="image"
+          >Imagen<span class="text-danger">*</span></label
+        >
+        <input
+          class="form-control"
+          type="url"
+          id="image"
+          formControlName="image"
+          placeholder="Introduce la url de la imagen"
+        />
+        @if (userForm.get('image')?.invalid && userForm.get('image')?.touched){
+        <div class="text-danger">
+          @if (userForm.get('image')?.hasError('required')){
+          <small>La url de la imagen es obligatoria.</small>
+          } @if (userForm.get('image')?.hasError('invalidImageUrl')){
+          <small
+            >Debe ser una URL de imagen válida (jpg, jpeg, gif, png, online,
+            webp, bmp)</small
+          >
+          }
+        </div>
+        }
+      </div>
+
+      <div class="my-3">
+        <input type="submit" [value]="buttonText" class="btn btn-danger" />
+      </div>
+    </form>
+  </div>
+</section>

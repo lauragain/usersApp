@@ -28,8 +28,16 @@ export class FormComponent {
       first_name: new FormControl(null, [Validators.required]),
       last_name: new FormControl(null, [Validators.required]),
       email: new FormControl(null, [Validators.required, Validators.email]),
-      image: new FormControl(null, [Validators.required])
+      image: new FormControl(null, [Validators.required, this.imageUrlValidator])
     })
+  }
+  
+  imageUrlValidator(control: FormControl): {[key:string]: any} | null{
+    const url = control.value
+    if (!url) return null
+ 
+    const validImage =  /\.(jpeg|jpg|gif|png|online|webp|bmp)$/i
+    return validImage.test(url) ? null : {invalidImageUrl: true}
   }
 
   ngOnInit(){

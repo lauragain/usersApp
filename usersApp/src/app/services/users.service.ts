@@ -18,21 +18,19 @@ export class UsersService {
     return [...page1.results, ...page2.results]
   }
 
-  async getById(id: string): Promise<IUser | null>{
-    const response = await firstValueFrom(this.http.get<IUser>(`${this.baseUrl}/${id}`))
-    return response ? response : null
+  getById(id: string): Promise<IUser>{
+    return firstValueFrom(this.http.get<IUser>(`${this.baseUrl}/${id}`))
   }
 
-  async deleteUser(id: string): Promise<IUser | null>{
-    const response = await firstValueFrom(this.http.delete<IUser>(`${this.baseUrl}/${id}`))
-    return response ? response : null
+  deleteUser(id: string): Promise<IUser>{
+    return firstValueFrom(this.http.delete<IUser>(`${this.baseUrl}/${id}`))
   }
 
   insert(body: IUser): Promise<IUser>{
     return firstValueFrom(this.http.post<IUser>(this.baseUrl, body))
   }
 
-  async updateUser(id: string, body: IUser): Promise<IUser>{
+  updateUser(id: string, body: IUser): Promise<IUser>{
     return firstValueFrom(this.http.put<IUser>(`${this.baseUrl}/${id}`, body))
   }
 }

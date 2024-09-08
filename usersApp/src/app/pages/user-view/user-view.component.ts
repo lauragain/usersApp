@@ -18,11 +18,16 @@ export class UserViewComponent implements OnInit{
   router = inject(Router)
 
   ngOnInit(){
-    this.activatedRoute.params.subscribe(async (params: any) =>{
-      let id = params.id
-      this.user = await this.usersService.getById(id)
-      this.arrUsers = await this.usersService.getAll()
+    try{
+      this.activatedRoute.params.subscribe(async (params: any) =>{
+        let id = params.id
+        this.user = await this.usersService.getById(id)
+        this.arrUsers = await this.usersService.getAll()
     })
+  } catch (error) {
+    console.error('Error al cargar el usuario', error)
+    alert('Error al cargar los datos. Inténtalo de nuevo')
+  }
   }
 
   async deleteUser(){

@@ -82,6 +82,11 @@
         <div class="text-danger">
           @if (userForm.get('image')?.hasError('required')){
           <small>La url de la imagen es obligatoria.</small>
+          } @if (userForm.get('image')?.hasError('invalidImageUrl')){
+          <small
+            >Debe ser una URL de imagen válida (jpg, jpeg, gif, png, online,
+            webp, bmp)</small
+          >
           }
         </div>
         }
